@@ -2,15 +2,15 @@ class Debris {
     constructor(image) {
         this.r = 5;
         this.a = 0;
-        this.rotationRate = random(-0.1, 0.1); // Adjusted rotation rate for more dynamic movement
+        this.rotationRate = random(-0.1, 0.1); 
         this.resetDebris();
         this.image = image;
-        this.rotationDirection = random() < 0.5 ? 1 : -1; // Added rotation direction for variation
+        this.rotationDirection = random() < 0.5 ? 1 : -1; 
     }
 
     resetDebris() {
         this.y = random(height - 10);
-        this.r = random(5, 15); // Increased maximum size for more variation
+        this.r = random(5, 15);
 
         let spawnLeftSide = random(1) < 0.5;
 
