@@ -2,7 +2,7 @@
 
 ## NFT Levels, Invaders Upgrade, and Spaceship Enhancements
 
-Unlock new NFT levels, invader upgrades, and spaceship enhancements for an enriched StackUpInvader gaming journey.
+These upgrades are implemented in an existing game built on the campaign of Gamer Onboarding platform with Immutable Passport integration.
 
 ### 1. **NFT Levels:**
 
