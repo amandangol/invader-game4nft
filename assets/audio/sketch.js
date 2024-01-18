@@ -1,6 +1,6 @@
 // let alienImages;
 let invaders;
-let playerShooterImage;
+let shooterImage;
 let player;
 let allDebris = [];
 let gameOver = false;
@@ -9,10 +9,10 @@ let canvasEl;
 let loading = 10;
 let loadingPlus = true;
 let resumeButton;
-let secondUpgradedShooterImage;
-let thirdUpgradedShooterImage;
-let alienImages = [];  
-let particlesArray = []; 
+let upgradedShooterImage;
+let fourthUpgradedShooterImage;
+let alienImages = [];  // Change to plural for an array of images
+let particlesArray = [];  // Change to a more descriptive name
 let shootingSound;
 let gameOverAudio;
 let isGameOverPlayed = false;
@@ -22,24 +22,24 @@ let lastShotTimestamp = 0;
 let gameSound1;
 let gameSound2;
 
-const shootingInterval = 500; 
+const shootingInterval = 500;  // Change to a more descriptive name
 
 const NUM_DEBRIS = 5; // number of space debris
 
 function preload() {
-    alienImages = loadImage("assets/ufo.png");  
-    playerShooterImage = loadImage('assets/spaceship.png');
-    secondUpgradedShooterImage = loadImage('assets/spaceship2.png');
-    thirdUpgradedShooterImage = loadImage('assets/spaceship3.png');
-    debriImage = loadImage('assets/asteroid.png');
+    alienImages = loadImage("assets/image/ufo.png");  // Load the first alien image
+    shooterImage = loadImage('assets/image/.png');
+    upgradedShooterImage = loadImage('assets/image/spaceship2.png');
+    fourthUpgradedShooterImage = loadImage('assets/image/spaceship3.png');
+    debriImage = loadImage('assets/image/asteroid.png');
     imgNft1 = loadImage('assets/nft1.png');
 
     // GAME SOUNDS
-    shootingSound = loadSound('assets/audio/photon-torpedos.mp3');
-    gameOverAudio = loadSound('assets/audio/gameover.mp3');
-    hitAudio = loadSound('assets/audio/invader-death.mp3');
-    alienExplosionSound = loadSound('assets/audio/invaderkilled.wav');
-    gameSound1 = loadSound('assets/audio/spaceinvaders1.mpeg');
+    shootingSound = loadSound('assets/photon-torpedos.mp3');
+    gameOverAudio = loadSound('assets/gameover.mp3');
+    hitAudio = loadSound('assets/invader-death.mp3');
+    alienExplosionSound = loadSound('assets/invaderkilled.wav');
+    gameSound1 = loadSound('assets/spaceinvaders1.mpeg');
     gameSound1.setVolume(0.5);
 }
 
@@ -50,7 +50,7 @@ function setup() {
     canvas.style('display', 'block');
     canvas.parent('sketch-holder');
     invaders = new Invaders(alienImages, 4);
-    player = new Player(playerShooterImage, imgNft1, hitAudio, alienExplosionSound, shootingSound, secondUpgradedShooterImage,thirdUpgradedShooterImage);
+    player = new Player(shooterImage, imgNft1, hitAudio, alienExplosionSound, shootingSound, upgradedShooterImage,fourthUpgradedShooterImage);
     // game sound
     gameSound1.loop();
 
@@ -135,40 +135,42 @@ function draw() {
 
         showGameOver();
     } else {
-        if (window?.userProfile?.email) {
-            if (!player.gamePaused) {
-                background(0);
-                player.update();
-                updateDebrisAndCheckCollisions();
-                invaders.update(player);
-            }
+        // Commented out the condition related to user profile
+        // if (window?.userProfile?.email) {
+        if (!player.gamePaused) {
+            background(0);
+            player.update();
+            updateDebrisAndCheckCollisions();
+            invaders.update(player);
+        }
+        
+        player.draw();
+        player.drawInfo();
+        invaders.draw();
+        drawParticlesArray();
 
-            player.draw();
-            player.drawInfo();
-            invaders.draw();
-            drawParticlesArray();
+        // Check if the game needs to be paused
+        if (player.gamePaused && resumeButton.elt.style.display === 'none') {
+            console.log('Pausing game, showing resume button');
+            noLoop();
+            resumeButton.show();
+        }
 
-            // Check if the game needs to be paused
-            if (player.gamePaused && resumeButton.elt.style.display === 'none') {
-                console.log('Pausing game, showing resume button');
-                noLoop();
-                resumeButton.show();
-            }
-
-            if (player.lives == 0) {
-                gameOver = true;
-            }
-        } 
-        else {
-            connectToStart();
+        if (player.lives == 0) {
+            gameOver = true;
         }
     }
-    
-    // Update button visibility based on authentication status
-    document.getElementById('btn-passport').hidden = window?.userProfile?.email;
-    document.getElementById('btn-logout').hidden = !window?.userProfile?.email;
-}
 
+    // Removed the else condition related to connecting to start
+    // else 
+    // {
+    //     connectToStart();
+    // }
+
+    // Update button visibility based on authentication status
+    document.getElementById('btn-passport').hidden = false;  // Always show the login button
+    document.getElementById('btn-logout').hidden = true;    // Always hide the logout button
+}
 
 function mousePressed() {
     if (gameOver === true) {

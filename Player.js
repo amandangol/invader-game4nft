@@ -1,8 +1,8 @@
 class Player {
-    constructor(shooterImage, imgNft1, hitAudio, alienExplosionSound, shootingSound, upgradedShooterImage, fourthUpgradedShooterImage) {
-      this.image = shooterImage;
-      this.upgradedShooterImage = upgradedShooterImage;
-      this.fourthUpgradedShooterImage = fourthUpgradedShooterImage;
+    constructor(playerShooterImage, imgNft1, hitAudio, alienExplosionSound, shootingSound, secondUpgradedShooterImage, thirdUpgradedShooterImage) {
+      this.image = playerShooterImage;
+      this.secondUpgradedShooterImage = secondUpgradedShooterImage;
+      this.thirdUpgradedShooterImage = thirdUpgradedShooterImage;
       this.imgNft1 = imgNft1;
       this.hitSound = hitAudio;
       this.explodeAlienSound = alienExplosionSound;
@@ -20,16 +20,16 @@ class Player {
       this.r = 10;
       this.nft = false;
       this.gas = [];
-      this.nftShown = { '1': false, '2': false, '3': false, '4': false };
+      this.nftShown = { '1': false, '2': false, '3': false, '4': false, '5': false};
       this.gamePaused = false;
       this.resumeCount = 0;
       this.hitAlpha = 255;
       this.hitEffect = false;
       this.firstNftScore = 50;
-      this.secondNftScore = 100;
-      this.thirdNftScore = 150;
-      this.fourthNftScore = 200;
-      this.fifthNftScore = 250
+      this.secondNftScore = 150;
+      this.thirdNftScore = 300;
+      this.fourthNftScore = 500;
+      this.fifthNftScore = 700
       this.lastExplodeTime = 0;
     }
   
@@ -111,12 +111,12 @@ class Player {
         console.log('Resuming game...');
       
         if (this.score >= this.secondNftScore) {
-          this.upgradeSpaceship(this.upgradedShooterImage, 4);
+          this.upgradeSpaceship(this.secondUpgradedShooterImage, 4);
           console.log('Spaceship upgraded to level 2');
         }
       
         if (this.score >= this.fourthNftScore) {
-          this.upgradeSpaceship(this.fourthUpgradedShooterImage, 6);
+          this.upgradeSpaceship(this.thirdUpgradedShooterImage, 6);
           console.log('Spaceship upgraded to level 4');
         }
       
@@ -180,12 +180,12 @@ class Player {
             this.pauseGame('1');
         } else if (this.score >= this.secondNftScore && !this.nftShown['2']) {
             this.pauseGame('2');
-            this.upgradeSpaceship(this.upgradedShooterImage, 4); // Upgrade spaceship to the second level
+            this.upgradeSpaceship(this.secondUpgradedShooterImage, 4); // Upgrade spaceship to the second level
         } else if (this.score >= this.thirdNftScore && !this.nftShown['3']) {
             this.pauseGame('3');
         } else if (this.score >= this.fourthNftScore && !this.nftShown['4']) {
             this.pauseGame('4');
-            this.upgradeSpaceship(this.fourthUpgradedShooterImage, 6); // Upgrade spaceship to the third level
+            this.upgradeSpaceship(this.thirdUpgradedShooterImage, 6); // Upgrade spaceship to the third level
 
         }else if(this.score>=this.fifthNftScore && !this.nftShown['5']){
             this.pauseGame('5');
@@ -280,12 +280,13 @@ class Player {
     }
   
     drawNfts() {
-      for (let i = 0; i < window.nfts.length; i++) {
+      for (let i = 0; i < (window.nfts ?? []).length; i++) {
         if (window.nfts[i]?.name === "Level 1 Badge" && window.nfts[i]?.contract_address === '0xdeab4e436bc7cc9a10fa1a55a22455e080970868') {
           image(this.imgNft1, width / 2 - this.r * 4 + (i + 1) * 30, 10, this.r * 2.5, this.r * 2.5);
         }
       }
     }
+    
   
     drawInfo() {
         fill(255);
