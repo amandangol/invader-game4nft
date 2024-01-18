@@ -1,5 +1,3 @@
-I apologize for the oversight. Let's include the information about the Invaders' upgrades in the readme file:
-
 # StackUpInvader Game Upgrades
 
 ## NFT Levels, Invaders Upgrade, and Spaceship Enhancements
