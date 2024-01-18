@@ -136,7 +136,7 @@ function draw() {
         showGameOver();
     } else {
         // Commented out the condition related to user profile
-        // if (window?.userProfile?.email) {
+        if (window?.userProfile?.email) {
         if (!player.gamePaused) {
             background(0);
             player.update();
@@ -162,10 +162,11 @@ function draw() {
     }
 
     // Removed the else condition related to connecting to start
-    // else 
-    // {
-    //     connectToStart();
-    // }
+    else 
+    {
+        connectToStart();
+    }
+
 
     // Update button visibility based on authentication status
     document.getElementById('btn-passport').hidden = false;  // Always show the login button
@@ -218,4 +219,4 @@ function updateDebrisAndCheckCollisions() {
 function windowResized() {
     resizeCanvas(canvasEl.offsetWidth, 400)
     background(0)
-}
+}}
