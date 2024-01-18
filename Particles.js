@@ -1,5 +1,3 @@
-// Particles.js
-
 class Particle {
   constructor(x, y) {
       this.x = x;

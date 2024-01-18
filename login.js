@@ -31,8 +31,8 @@ const passportLogout = async function () {
 
 }
 
-const CONTRACT_ADDRESS = '0x7a8e3adcf3e2f01062a3f8efda6b90984127391f';
-const PRIVATE_KEY = '0004ba6dead336fdaf493c2cde3bc8f7059758aeddca14dec92914eb5947e7c3';
+const CONTRACT_ADDRESS = '0x1840820d2cebb5815cf1282f06f713bc4cf53146';
+const PRIVATE_KEY = '9302b8955b184be46300b444eb4b1c39dc3f0899cae560872af0ed278d8688cb';
 
 const CONTRACT_ABI = [
     'function grantRole(bytes32 role, address account)',
